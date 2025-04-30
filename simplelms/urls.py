@@ -16,9 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
+
+
+urlpatterns += [
+    path('statistics/users-with-courses/', views.users_with_courses_count, name='users_with_courses_count'),
+    path('statistics/users-without-courses/', views.users_without_courses_count, name='users_without_courses_count'),
+    path('statistics/avg-courses-followed/', views.avg_courses_followed, name='avg_courses_followed'),
+    path('statistics/top-course-follower/', views.top_course_follower, name='top_course_follower'),
+    path('statistics/users-not-following/', views.users_not_following_courses, name='users_not_following_courses'),
+]
